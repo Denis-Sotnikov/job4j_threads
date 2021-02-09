@@ -9,17 +9,19 @@ import java.util.Date;
 public class Wget implements Runnable {
     private final String url;
     private final int speed;
+    private final String fileOutput;
 
-    public Wget(String url, int speed) {
+    public Wget(String url, int speed, String fileOutput) {
         this.url = url;
         this.speed = speed;
+        this.fileOutput = fileOutput;
     }
 
     @Override
     public void run() {
-        String file = "https://raw.githubusercontent.com/peterarsentev/course_test/master/pom.xml";
+        String file = url;
         try (BufferedInputStream in = new BufferedInputStream(new URL(file).openStream());
-             FileOutputStream fileOutputStream = new FileOutputStream("pom_tmp.xml")) {
+             FileOutputStream fileOutputStream = new FileOutputStream(fileOutput)) {
             byte[] dataBuffer = new byte[1024];
             int bytesRead;
             System.out.println("speed = " + this.speed);
@@ -42,9 +44,31 @@ public class Wget implements Runnable {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        String url = args[0];
-        int speed = Integer.parseInt(args[1]);
-        Thread wget = new Thread(new Wget(url, speed));
+        System.out.println(args.length);
+        String url;
+        int speed;
+        String fileOutput;
+        if (args.length >= 1) {
+            url = args[0];
+        } else {
+            System.out.println("Необходимо задать аргументы. Использовано значение по умолчанию");
+            url = "https://raw.githubusercontent.com/peterarsentev/course_test/master/pom.xml";
+        }
+
+        if (args.length >= 2) {
+            speed = Integer.parseInt(args[1]);
+        } else {
+            System.out.println("Необходимо задать аргументы. Использовано значение по умолчанию");
+            speed = 200;
+        }
+
+        if (args.length >= 3) {
+            fileOutput = args[2];
+        } else {
+            System.out.println("Необходимо задать аргументы. Использовано значение по умолчанию");
+            fileOutput = "file.txt";
+        }
+        Thread wget = new Thread(new Wget(url, speed, fileOutput));
         wget.start();
         wget.join();
     }
