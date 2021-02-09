@@ -10,9 +10,10 @@ public class ThreadState {
                 () -> System.out.println(Thread.currentThread().getName())
         );
         first.start();
-        first.join();
+//        first.join();
         second.start();
-        second.join();
+//        second.join();
+        Thread.sleep(1000);
         System.out.println("Work done");
     }
 
