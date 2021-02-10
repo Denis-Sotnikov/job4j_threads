@@ -31,7 +31,7 @@ public class ThreadState {
             System.out.println(first.getName() + " " + first.getState());
         }
         while (second.getState() != Thread.State.TERMINATED) {
-            System.out.println(first.getState());
+            System.out.println(second.getState());
         }
         System.out.println("Work done");
     }
