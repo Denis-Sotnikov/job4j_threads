@@ -16,8 +16,7 @@ public class ConsoleProgress implements Runnable {
     public void run() {
         String[] array = {"\\", "|", "/"};
         int count = 0;
-        for (int i = 0; i <= 100; i++) {
-            if (!Thread.currentThread().isInterrupted()) {
+        while (!Thread.currentThread().isInterrupted()) {
                 try {
                     if (count == 3) {
                         count = 0;
@@ -27,9 +26,7 @@ public class ConsoleProgress implements Runnable {
                     count++;
                 } catch (Exception e) {
                     Thread.currentThread().interrupt();
-
                 }
-            }
         }
     }
 }
