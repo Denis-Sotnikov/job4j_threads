@@ -1,11 +1,11 @@
 package ru.job4j.concurrent;
 
 public class ConsoleProgress implements Runnable {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Thread progress = new Thread(new ConsoleProgress());
         progress.start();
         try {
-            Thread.sleep(100); /* симулируем выполнение параллельной задачи в течение 1 секунды. */
+            Thread.sleep(10000); /* симулируем выполнение параллельной задачи в течение 1 секунды. */
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -24,7 +24,7 @@ public class ConsoleProgress implements Runnable {
                     System.out.print("\r load: " + "Loading ..... " + array[count]);
                     Thread.sleep(500);
                     count++;
-                } catch (Exception e) {
+                } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
         }
