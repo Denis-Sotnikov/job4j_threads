@@ -14,29 +14,33 @@ public class ParseFile {
     }
 
     public synchronized String getContent() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        StringBuilder output = null;
-        while (reader.ready()) {
-            output.append(reader.readLine());
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            StringBuilder output = null;
+            while (reader.ready()) {
+                output.append(reader.readLine());
+            }
+            return output.toString();
         }
-        return output.toString();
     }
 
     public synchronized String getContentWithoutUnicode() throws IOException {
-        InputStream i = new FileInputStream(file);
-        StringBuilder output = null;
-        int data;
-        while ((data = i.read()) > 0) {
-            if (data < 128) {
-                output.append((char) data);
+        try (InputStream i = new FileInputStream(file)) {
+            StringBuilder output = null;
+            int data;
+            while ((data = i.read()) > 0) {
+                if (data < 128) {
+                    output.append((char) data);
+                }
             }
-        }
         return output.toString();
+        }
     }
 
     public synchronized void saveContent(String content) throws IOException {
-        OutputStream o = new FileOutputStream(file);
-        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-        writer.write(content);
+        try (OutputStream o = new FileOutputStream(file);
+             BufferedWriter writer = new BufferedWriter(new FileWriter(file))
+        ) {
+            writer.write(content);
+        }
     }
 }
