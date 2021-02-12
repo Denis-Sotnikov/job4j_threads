@@ -5,7 +5,7 @@ public class CountBarrier {
 
     private final int total;
 
-    private volatile int count = 0;
+    private int count = 0;
 
     public CountBarrier(final int total) {
         this.total = total;
@@ -14,10 +14,7 @@ public class CountBarrier {
     public synchronized void count() throws InterruptedException {
         count++;
         System.out.println("count = " + count);
-        if (count != total) {
             notifyAll();
-        }
-
     }
 
     public synchronized void await() throws InterruptedException {
