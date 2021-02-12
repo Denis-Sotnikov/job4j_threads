@@ -1,5 +1,6 @@
 package ru.job4j.concurrent;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class User {

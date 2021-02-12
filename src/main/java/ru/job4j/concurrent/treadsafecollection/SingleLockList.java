@@ -2,7 +2,6 @@ package ru.job4j.concurrent.treadsafecollection;
 
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
-import ru.job4j.collection.SimpleArray;
 
 
 import java.util.ArrayList;
