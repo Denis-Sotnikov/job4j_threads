@@ -31,8 +31,13 @@ public class SimpleBlockingQueue<T> {
             System.out.println("Нить погрузилась в сон here");
             this.wait();
         }
+        T val = queue.poll();
         notifyAll();
-        return queue.poll();
+        return val;
+    }
+
+    public synchronized boolean isEmpty() {
+        return this.queue.isEmpty();
     }
 
     public static void main(String[] args) throws InterruptedException {
