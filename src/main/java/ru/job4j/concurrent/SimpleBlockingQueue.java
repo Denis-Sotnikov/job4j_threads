@@ -13,23 +13,23 @@ public class SimpleBlockingQueue<T> {
     private Queue<T> queue = new LinkedList<>();
 
     public synchronized void offer(T value) throws InterruptedException {
-        if (queue.add(value)) {
-            notifyAll();
-            if (this.queue.size() == 5) {
-                System.out.println("Producer заснул");
-                wait();
-            }
+        while (queue.size() >= 10) {
+            this.wait();
         }
+        queue.add(value);
+        notifyAll();
     }
 
     public synchronized T poll() throws InterruptedException {
-        while (queue.peek() == null) {
-            System.out.println("Нить погрузилась в сон here");
-            this.wait();
+        while (true) {
+            if (queue.size() > 0) {
+                T val = queue.poll();
+                notifyAll();
+                return val;
+            } else {
+                this.wait();
+            }
         }
-        T val = queue.poll();
-        notifyAll();
-        return val;
     }
 
     public static void main(String[] args) throws InterruptedException {
