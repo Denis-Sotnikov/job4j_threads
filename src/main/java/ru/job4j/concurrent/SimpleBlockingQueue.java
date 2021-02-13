@@ -22,10 +22,6 @@ public class SimpleBlockingQueue<T> {
         }
     }
 
-    public synchronized T peek() {
-        return queue.peek();
-    }
-
     public synchronized T poll() throws InterruptedException {
         while (queue.peek() == null) {
             System.out.println("Нить погрузилась в сон here");
@@ -34,10 +30,6 @@ public class SimpleBlockingQueue<T> {
         T val = queue.poll();
         notifyAll();
         return val;
-    }
-
-    public synchronized boolean isEmpty() {
-        return this.queue.isEmpty();
     }
 
     public static void main(String[] args) throws InterruptedException {
