@@ -10,7 +10,6 @@ public class CASCount {
 
     public void increment() {
         Integer i;
-        Integer next;
         do {
             i = count.get();
         } while (!count.compareAndSet(i, i + 1));
