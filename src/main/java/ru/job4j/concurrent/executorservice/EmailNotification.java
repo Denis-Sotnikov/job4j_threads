@@ -18,9 +18,7 @@ public class EmailNotification {
     }
 
     public void send(String subject, String body, String email) {
-        System.out.println(subject);
-        System.out.println(body);
-        System.out.println(email);
+
     }
 
     public void close() {
