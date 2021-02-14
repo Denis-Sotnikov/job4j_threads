@@ -32,7 +32,7 @@ public class CacheTest {
         assertThat(cache.update(base), is(true));
     }
 
-    @Test
+    @Test (expected = OptimisticException.class)
     public void whenThrow() {
         Base base = new Base(2, 1);
         base.setName("SecondAfterReplace");
