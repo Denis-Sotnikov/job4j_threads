@@ -2,4 +2,5 @@
 [![codecov](https://codecov.io/gh/Denis-Sotnikov/job4j_threads/branch/master/graph/badge.svg?token=LGCA6Y5TTP)](https://codecov.io/gh/Denis-Sotnikov/job4j_threads)
 
 58789
+456
 Объединение зафиксированных изменений
